@@ -18,5 +18,7 @@ class YandeSpider(scrapy.Spider):
         item = PictureItem()
         item['file_urls'] = response.css("a.directlink.largeimg::attr('href')").extract()
         yield item
-        next_url = response.urljoin(response.css("a.next_page::attr('href')").extract()[0])
-        yield scrapy.Request(next_url , self.parse)
+        next_url = response.css("a.next_page::attr('href')").extract()
+        if next_url:
+            next_url = response.urljoin(next_url[0])
+            yield scrapy.Request(next_url , self.parse)

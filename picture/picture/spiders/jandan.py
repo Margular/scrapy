@@ -16,5 +16,6 @@ class JandanSpider(scrapy.Spider):
         item = PictureItem()
         item['file_urls'] = response.xpath("//a[@class='view_img_link']/@href").extract()
         yield item
-        next_url = response.xpath("//a[@class='previous-comment-page']/@href").extract()[0]
-        yield scrapy.Request(next_url , self.parse)
+        next_url = response.xpath("//a[@class='previous-comment-page']/@href").extract()
+        if next_url:
+            yield scrapy.Request(next_url[0] , self.parse)
