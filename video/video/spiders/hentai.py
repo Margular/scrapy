@@ -17,3 +17,6 @@ class HentaiSpider(scrapy.Spider):
         item = VideoItem()
         item['file_urls'] = response.xpath("//a[contains(@href,'http://mobile.madthumbscdn.com/videos')]/@href").extract()
         yield item
+        next_url = response.xpath('//a[@data-iconpos="right"]/@href').extract()
+        if next_url:
+            yield scrapy.Request(next_url[0] , self.parse)

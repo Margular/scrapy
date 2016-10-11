@@ -64,8 +64,7 @@ class MyFilesPipeline(FilesPipeline):
             return self.file_key(url)
         ## end of deprecation warning block
 
+        url = url.split('?')[0]
         media_guid = hashlib.sha1(to_bytes(url)).hexdigest()  # change to request.url after deprecation
-        print("media_guid : %s" % media_guid)
         media_ext = os.path.splitext(url)[1].split('?')[0]  # change to request.url after deprecation
-        print("media_ext : %s" % media_ext)
         return 'full/%s%s' % (media_guid, media_ext)
