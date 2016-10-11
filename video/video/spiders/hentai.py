@@ -19,4 +19,4 @@ class HentaiSpider(scrapy.Spider):
         yield item
         next_url = response.xpath('//a[@data-iconpos="right"]/@href').extract()
         if next_url:
-            yield scrapy.Request(next_url[0] , self.parse)
+            yield scrapy.Request('http://m.madthumbs.com' + next_url[0] , self.parse)
