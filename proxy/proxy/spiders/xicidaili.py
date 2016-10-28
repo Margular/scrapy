@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import scrapy
-import sys
 from proxy.items import ProxyItem
 
 class XicidailiSpider(scrapy.Spider):
