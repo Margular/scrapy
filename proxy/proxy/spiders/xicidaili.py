@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import scrapy
+import time
 from proxy.items import ProxyItem
 
 class XicidailiSpider(scrapy.Spider):
@@ -10,6 +11,8 @@ class XicidailiSpider(scrapy.Spider):
                     'http://www.xicidaili.com/nt',
                     'http://www.xicidaili.com/wn',
                     'http://www.xicidaili.com/wt'   ]
+
+    max_page = 10
 
     def parse(self, response):
         item = ProxyItem()
@@ -32,3 +35,8 @@ class XicidailiSpider(scrapy.Spider):
                 item[i] = item[i][0].strip() if item[i] else ""
 
             yield item
+
+        next_url = response.urljoin(response.xpath('//a[@class="next_page"]/@href').extract()[0])
+        if int(next_url.split('/')[-1]) <= self.max_page:
+            time.sleep(5)
+            yield scrapy.Request(next_url , self.parse)
