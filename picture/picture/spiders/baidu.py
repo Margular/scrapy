@@ -7,15 +7,15 @@ class BaiduSpider(scrapy.Spider):
     allowed_domains = ["baidu.com"]
     pn = 0
     custom_settings = {
-                'FILES_STORE' : '/home/cui/图片/baidu'
-            }
+        'FILES_STORE' : '/home/cui/图片/baidu'
+    }
 
     def __init__(self , keywords = '' , *args , **kwargs):
         super(BaiduSpider , self).__init__(*args , **kwargs)
         self.url = 'http://image.baidu.com/search/flip?tn=baiduimage&word=' + keywords
         self.start_urls = [
-                    self.url
-                ]
+            self.url
+        ]
 
     def parse(self, response):
         item = PictureItem()
