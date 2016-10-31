@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import scrapy
-import time
 from proxy.items import ProxyItem
 
 class XicidailiSpider(scrapy.Spider):
@@ -27,9 +26,9 @@ class XicidailiSpider(scrapy.Spider):
             item["address"] = temp[index].xpath('td[position()=4]/a/text()').extract()
             item["anonymous"] = temp[index].xpath('td[position()=5]/text()').extract()
             item["speed"] = temp[index].xpath('td[position()=7]/div/@title').extract()
-            item["connection_time"] = temp[index].xpath('td[position()=8]/div/@title').extract()
-            item["alive_time"] = temp[index].xpath('td[position()=9]/text()').extract()
-            item["validate_date"] = temp[index].xpath('td[position()=10]/text()').extract()
+            item["ctime"] = temp[index].xpath('td[position()=8]/div/@title').extract()
+            item["ttl"] = temp[index].xpath('td[position()=9]/text()').extract()
+            item["vdate"] = temp[index].xpath('td[position()=10]/text()').extract()
 
             for i in item:  #strip blank
                 item[i] = item[i][0].strip() if item[i] else ""
@@ -38,5 +37,4 @@ class XicidailiSpider(scrapy.Spider):
 
         next_url = response.urljoin(response.xpath('//a[@class="next_page"]/@href').extract()[0])
         if int(next_url.split('/')[-1]) <= self.max_page:
-            time.sleep(5)
             yield scrapy.Request(next_url , self.parse)
