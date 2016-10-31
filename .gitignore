@@ -1,2 +1,5 @@
 #python cache dir
 __pycache__
+
+#python binary file
+*.pyc
