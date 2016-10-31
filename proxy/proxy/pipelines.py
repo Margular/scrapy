@@ -31,7 +31,7 @@ class DuplicatesPipeline(object):
 
     def process_item(self, item, spider):
         if item['ip'] + ':' + item['port'] in self.proxies_seen:
-            raise DropItem('Duplicate item found: <%s>' % item)
+            raise DropItem('Duplicate item found')
         else:
             self.proxies_seen.add(item['ip'] + ':' + item['port'])
             return item
