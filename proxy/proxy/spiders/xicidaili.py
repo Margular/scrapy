@@ -23,7 +23,10 @@ class XicidailiSpider(scrapy.Spider):
             item["port"] = temp[index].xpath('td[position()=3]/text()').extract()
             item["protocol"] = temp[index].xpath('td[position()=6]/text()').extract()
             item["country"] = temp[index].xpath('td[position()=1]/img/@alt').extract()
-            item["address"] = temp[index].xpath('td[position()=4]/a/text()').extract()
+            item["address"] = temp[index].xpath('td[position()=4]/a/text() | td[position()=4]/text()').extract()
+            for address in item["address"]:
+                if address.strip():
+                    item["address"] = [address]
             item["anonymous"] = temp[index].xpath('td[position()=5]/text()').extract()
             item["speed"] = temp[index].xpath('td[position()=7]/div/@title').extract()
             item["ctime"] = temp[index].xpath('td[position()=8]/div/@title').extract()
