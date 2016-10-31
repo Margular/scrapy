@@ -7,7 +7,6 @@
 
 import scrapy
 
-
 class ProxyItem(scrapy.Item):
     # define the fields for your item here like:
     ip = scrapy.Field()
@@ -17,6 +16,6 @@ class ProxyItem(scrapy.Item):
     address = scrapy.Field()
     anonymous = scrapy.Field()
     speed = scrapy.Field()
-    connection_time = scrapy.Field()
-    alive_time = scrapy.Field()
-    validate_date = scrapy.Field()
+    ctime = scrapy.Field()  #connection time
+    ttl = scrapy.Field()    #time to live
+    vdate = scrapy.Field()  #verification date
