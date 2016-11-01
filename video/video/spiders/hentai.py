@@ -10,7 +10,7 @@ class HentaiSpider(scrapy.Spider):
     )
 
     custom_settings = {
-                'FILES_STORE' : '/home/cui/视频/hentai'
+                'FILES_STORE' : '/media/cui/5AE823D1E823A9E9/视频/hentai'
             }
 
     def parse(self, response):
