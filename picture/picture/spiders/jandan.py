@@ -8,7 +8,7 @@ class JandanSpider(scrapy.Spider):
     start_urls = ['http://jandan.net/ooxx']
 
     custom_settings = {
-                'FILES_STORE' : '/home/cui/图片/jandan'
+                'FILES_STORE' : '/media/cui/5AE823D1E823A9E9/图片/jandan'
             }
 
 

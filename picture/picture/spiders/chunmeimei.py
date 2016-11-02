@@ -10,8 +10,8 @@ class ChunmeimeiSpider(scrapy.Spider):
     )
 
     custom_settings = {
-                'FILES_STORE' : '/home/cui/图片/chunmeimei'
-            }
+        'FILES_STORE' : '/media/cui/5AE823D1E823A9E9/图片/chunmeimei'
+    }
 
     def parse(self, response):
         for url in response.xpath("//a[@class='tag-font-size-14']/@href").extract()[1:]:
