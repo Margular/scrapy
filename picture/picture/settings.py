@@ -82,8 +82,12 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scrapy.pipelines.files.FilesPipeline': 100,
+    'scrapy.pipelines.images.ImagesPipeline': 100,
 }
+
+IMAGES_URLS_FIELD = 'image_urls'
+IMAGES_RESULT_FIELD = 'images'
+IMAGES_STORE = '/Users/dana/Pictures/'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

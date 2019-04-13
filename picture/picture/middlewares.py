@@ -14,7 +14,7 @@ class RandomUserAgent(object):
 
 class RandomProxy(object):
     def __init__(self):
-        with open('proxy.json' , 'r') as f:
+        with open('../proxy/proxy.json' , 'r') as f:
             self.proxies = eval(f.read())
 
     def process_request(self, request, spider):
