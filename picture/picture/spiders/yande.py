@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+import os
 import scrapy
 from picture.items import PictureItem
+from scrapy.utils.project import get_project_settings
 
 
 class YandeSpider(scrapy.Spider):
@@ -9,14 +11,14 @@ class YandeSpider(scrapy.Spider):
     start_urls = (
         'https://yande.re/post?tags=rating:e&page=1',
     )
-
     custom_settings = {
-                'FILES_STORE' : '/media/cui/5AE823D1E823A9E9/图片/yande'
-            }
+        'IMAGES_STORE' : os.path.join(get_project_settings().get('IMAGES_STORE'), name),
+        "CONCURRENT_REQUESTS_PER_DOMAIN": 5
+    }
 
     def parse(self, response):
         item = PictureItem()
-        item['file_urls'] = response.css("a.directlink.largeimg::attr('href')").extract()
+        item['image_urls'] = response.css("a.directlink.largeimg::attr('href')").extract()
         yield item
         next_url = response.css("a.next_page::attr('href')").extract()
         if next_url:
