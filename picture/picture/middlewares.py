@@ -1,6 +1,5 @@
 import json
 import random
-import logging
 
 class RandomUserAgent(object):
     def __init__(self, agents):
