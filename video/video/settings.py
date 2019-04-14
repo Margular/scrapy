@@ -73,6 +73,7 @@ ITEM_PIPELINES = {
 FILES_URLS_FIELD = 'file_urls'
 FILES_RESULT_FIELD = 'files'
 FILES_STORE = '/Users/dana/Movies/'
+DOWNLOAD_TIMEOUT = 3600
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
