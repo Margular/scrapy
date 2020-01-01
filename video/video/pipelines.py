@@ -5,10 +5,12 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-from scrapy.pipelines.files import FilesPipeline
-from scrapy.utils.python import to_bytes
 import hashlib
 import os
+
+from scrapy.pipelines.files import FilesPipeline
+from scrapy.utils.python import to_bytes
+
 
 class MyFilesPipeline(FilesPipeline):
     def file_path(self, request, response=None, info=None):

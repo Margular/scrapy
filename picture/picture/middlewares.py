@@ -1,6 +1,7 @@
 import json
 import random
 
+
 class RandomUserAgent(object):
     def __init__(self, agents):
         self.agents = agents
@@ -12,6 +13,7 @@ class RandomUserAgent(object):
     def process_request(self, request, spider):
         request.headers.setdefault('User-Agent', random.choice(self.agents))
 
+
 class RandomProxy(object):
     def __init__(self):
         self.proxies = json.load(open('../proxy/proxy.json'))
@@ -19,4 +21,4 @@ class RandomProxy(object):
     def process_request(self, request, spider):
         proxy = random.choice(self.proxies)
         spider.logger.info('Switch proxy: ' + repr(proxy))
-        request.meta['proxy'] = '%s://%s:%s' % (proxy['protocol'].lower() , proxy['ip'] , proxy['port'])
+        request.meta['proxy'] = '%s://%s:%s' % (proxy['protocol'].lower(), proxy['ip'], proxy['port'])

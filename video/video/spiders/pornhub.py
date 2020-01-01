@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
 import time
-import urllib.parse
+
 import scrapy
-from video.items import VideoItem
 from scrapy.utils.project import get_project_settings
+from video.items import VideoItem
 
 
 class PornhubSpider(scrapy.Spider):
@@ -23,7 +23,6 @@ class PornhubSpider(scrapy.Spider):
         "DOWNLOAD_DELAY": 30
     }
 
-
     def parse(self, response):
         links = response.xpath(self.videos).extract()
         if len(links) == 0:
@@ -34,20 +33,20 @@ class PornhubSpider(scrapy.Spider):
 
         self.logger.debug("get links: " + repr(links))
         for link in links:
-            yield response.follow(link, self.parseLink, priority=10)
+            yield response.follow(link, self.parse_link, priority=10)
 
         next_url = response.xpath(self.next_page).extract()[0]
         if next_url:
             yield response.follow(next_url, self.parse)
 
-    def parseLink(self, response):
+    def parse_link(self, response):
         item = VideoItem()
         try:
             video_url = response.selector.re(r'"videoUrl":"([^"]+?)"')[0].replace("\\/", "/")
         except IndexError as e:
             self.logger.warn("seems we have been detected by pornhub, retry...")
             time.sleep(120)
-            yield scrapy.Request(response.url, self.parseLink, dont_filter=True, priority=100)
+            yield scrapy.Request(response.url, self.parse_link, dont_filter=True, priority=100)
             return
 
         item['file_urls'] = [video_url]
